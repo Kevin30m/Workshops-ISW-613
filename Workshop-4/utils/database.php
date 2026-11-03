@@ -1,0 +1,15 @@
+<?php
+
+$dsn = 'mysql:host=127.0.0.1;dbname=iswapp;charset=utf8mb4';
+$dbUser = 'root';
+$dbPassword = '';
+
+try {
+    $conn = new PDO($dsn, $dbUser, $dbPassword, [
+        PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
+    ]);
+} catch (PDOException $exception) {
+    error_log('Database connection error: ' . $exception->getMessage());
+    http_response_code(500);
+    exit('The service is temporarily unavailable. Please try again later.');
+}
