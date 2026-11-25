@@ -1,59 +1,214 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
-<p align="center">
-<a href="https://github.com/laravel/framework/actions"><img src="https://github.com/laravel/framework/workflows/tests/badge.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+# Quiz 3 - Sistema de Matrícula
 
-## About Laravel
+## Información general
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+- Universidad Técnica Nacional
+- Sede: San Carlos
+- Curso: Programación en Ambiente Web I
+- Código: ISW-613
+- Evaluación: Quiz 3
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+## Descripción
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+Sistema web desarrollado con Laravel utilizando la arquitectura MVC
+(Modelo, Vista y Controlador), que permite administrar cursos y
+realizar la matrícula de estudiantes.
 
-## Learning Laravel
+## Tecnologías utilizadas
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework. You can also check out [Laravel Learn](https://laravel.com/learn), where you will be guided through building a modern Laravel application.
+- Laravel 12
+- PHP 8.2
+- MySQL
+- Blade
+- Bootstrap 5
+- Eloquent ORM
+- Composer
+- Git y GitHub
+- PHPUnit
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains thousands of video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+## Funcionalidades
 
-## Laravel Sponsors
+### CRUD de cursos
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the [Laravel Partners program](https://partners.laravel.com).
+- Crear cursos.
+- Listar cursos registrados.
+- Editar cursos.
+- Eliminar cursos sin matrículas asociadas.
+- Validar códigos de cursos duplicados.
+- Validar la cantidad de créditos.
+- Seleccionar carreras precargadas mediante seeders.
 
-### Premium Partners
+### Matrícula de estudiantes
 
-- **[Vehikl](https://vehikl.com)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel)**
-- **[DevSquad](https://devsquad.com/hire-laravel-developers)**
-- **[Redberry](https://redberry.international/laravel-development)**
-- **[Active Logic](https://activelogic.com)**
+- Formulario de matrícula como página principal.
+- Registro del nombre e identificación del estudiante.
+- Selección de cursos disponibles.
+- Almacenamiento de matrículas en MySQL.
+- Visualización de los datos registrados.
+- Impresión del comprobante de matrícula.
 
-## Contributing
+## Requisitos
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+- PHP 8.2 o superior compatible con Laravel 12.
+- Composer.
+- MySQL o MariaDB.
+- XAMPP o entorno equivalente.
+- Git.
+- Extensión PDO MySQL.
+- Extensión PDO SQLite para las pruebas.
+- Internet para cargar Bootstrap mediante CDN.
 
-## Code of Conduct
+## Instalación y ejecución
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+### 1. Clonar el repositorio
 
-## Security Vulnerabilities
+```bash
+git clone https://github.com/Kevin30m/Workshops-ISW-613.git
+```
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+### 2. Entrar al proyecto
 
-## License
+```bash
+cd Workshops-ISW-613
+cd "Quiz 3"
+```
 
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+### 3. Instalar las dependencias
+
+```bash
+composer install
+```
+
+### 4. Crear el archivo de configuración
+
+```bash
+cp .env.example .env
+```
+
+### 5. Generar la clave de la aplicación
+
+```bash
+php artisan key:generate
+```
+
+### 6. Crear la base de datos
+
+Iniciar MySQL y Apache desde XAMPP.
+
+Ingresar a phpMyAdmin y ejecutar:
+
+```sql
+CREATE DATABASE IF NOT EXISTS quiz3_matricula
+CHARACTER SET utf8mb4
+COLLATE utf8mb4_unicode_ci;
+```
+
+### 7. Configurar la conexión
+
+Verificar los siguientes valores en el archivo .env:
+
+```ini
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=quiz3_matricula
+DB_USERNAME=root
+DB_PASSWORD=
+```
+
+Ajustar las credenciales según el entorno local.
+
+### 8. Ejecutar migraciones y seeders
+
+```bash
+php artisan config:clear
+php artisan migrate --seed
+```
+
+Este comando crea las tablas e inserta cinco carreras
+y seis cursos de ejemplo.
+
+### 9. Iniciar el servidor
+
+```bash
+php artisan serve --port=8001
+```
+
+Abrir en el navegador:
+
+http://127.0.0.1:8001
+
+## Base de datos
+
+El sistema utiliza tres tablas principales:
+
+- carreras
+- cursos
+- matriculas
+
+Una carrera puede tener varios cursos y un curso
+puede tener varias matrículas.
+
+## Arquitectura MVC
+
+### Modelos
+
+- Carrera.php
+- Curso.php
+- Matricula.php
+
+### Controladores
+
+- CursoController.php
+- MatriculaController.php
+
+### Vistas
+
+- Plantilla principal.
+- Listado de cursos.
+- Creación de cursos.
+- Edición de cursos.
+- Formulario de matrícula.
+- Confirmación de matrícula.
+
+## Pruebas automatizadas
+
+Para ejecutar las pruebas:
+
+```bash
+php artisan config:clear
+php artisan test
+```
+
+Las pruebas utilizan SQLite en memoria para no afectar
+los registros de la base de datos principal de MySQL.
+
+### Resultados obtenidos
+
+- 14 pruebas exitosas.
+- 0 pruebas fallidas.
+- 38 aserciones verificadas.
+- Tiempo de ejecución: 10.82 segundos.
+
+## Seguridad
+
+- Protección CSRF.
+- Validaciones del lado del servidor.
+- Restricciones de integridad referencial.
+- Exclusión del archivo .env del repositorio.
+- Exclusión de las dependencias de vendor.
+
+El sistema fue desarrollado con fines académicos
+para ejecución local. No incluye autenticación ni
+autorización de usuarios.
+
+## Control de versiones
+
+El proyecto fue desarrollado mediante commits independientes,
+registrando progresivamente las diferentes etapas
+de implementación.
+
+## Repositorio
+
+https://github.com/Kevin30m/Workshops-ISW-613
